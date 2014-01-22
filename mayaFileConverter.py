@@ -1,5 +1,20 @@
 #! /usr/bin/env python2
 
+# Copyright (c) 2013 ILMVFX Blog All rights reserved. Used under
+# authorization. This material contains the confidential and proprietary
+# information of the company. and may not be copied in whole or in part
+# without the express written permission of the company. This copyright
+# notice does not imply publication.
+
+__author__ = "Jiang Han"
+__copyright__ = "Copyright 2013, The ShittyTools Project"
+__credits__ = ["Jiang Han"]
+__license__ = "GPL"
+__version__ = "3.0"
+__maintainer__ = "oglop"
+__email__ = "oglops@gmail.com"
+__status__ = "Shitty"
+
 import argparse
 import os
 
