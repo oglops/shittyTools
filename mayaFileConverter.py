@@ -9,10 +9,11 @@
 __author__ = "Jiang Han"
 __copyright__ = "Copyright 2013, The ShittyTools Project"
 __credits__ = ["Jiang Han"]
-__license__ = "GPL"
-__version__ = "3.0"
+__license__ = "GPLv3"
+__version__ = "0.1"
 __maintainer__ = "oglop"
 __email__ = "oglops@gmail.com"
+__website__ = 'ilmvfx.wordpress.com'
 __status__ = "Shitty"
 
 import argparse
@@ -65,6 +66,7 @@ def main(args=None):
                         newFile.write(m)
                 else:
                     print f, '-->', 'skipped'
+
 
 def _parseArgs():
 
