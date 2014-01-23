@@ -49,7 +49,6 @@ def main(args=None):
                     print f, '-->', 'skipped'
 
         elif f.endswith('.ma'):
-            pass
             with open(f, "r") as maFile:
                 m = maFile.read()
                 pos = m.find('requires maya')
@@ -62,7 +61,7 @@ def main(args=None):
                     newVerLine = currentVerLine.replace(currentVer, args.v, 1)
                     m = m.replace(currentVerLine, newVerLine, 1)
 
-                    with open(newFile, "wb") as newFile:
+                    with open(newFile, "w") as newFile:
                         newFile.write(m)
                 else:
                     print f, '-->', 'skipped'
