@@ -16,8 +16,9 @@ __email__ = "oglops@gmail.com"
 __website__ = 'ilmvfx.wordpress.com'
 __status__ = "Shitty"
 
-import argparse
 import os
+import argparse
+import re
 
 
 def newName(f, args):
@@ -49,29 +50,35 @@ def main(args=None):
                     print f, '-->', 'skipped'
 
         elif f.endswith('.ma'):
-            pass
+
             with open(f, "r") as maFile:
-                m = maFile.read()
-                pos = m.find('requires maya')
-                maFile.seek(pos)
-                currentVerLine = maFile.readline()
-                currentVer = currentVerLine.split('"')[1]
+                with open(newFile, "w") as newMaFile:
+                    for line in maFile:
 
-                if currentVer != args.v:
-                    print f, '-->', newFile
-                    newVerLine = currentVerLine.replace(currentVer, args.v, 1)
-                    m = m.replace(currentVerLine, newVerLine, 1)
+                        if re.match('^requires maya ".*";\n', line):
+                            currentVer = line.split('"')[1]
+                            if currentVer != args.v:
+                                print f, '-->', newFile
+                                line = line.replace(currentVer, args.v, 1)
+                                newMaFile.write(line)
+                                break
+                            else:
+                                print f, '-->', 'skipped'
 
-                    with open(newFile, "wb") as newFile:
-                        newFile.write(m)
-                else:
-                    print f, '-->', 'skipped'
+                        newMaFile.write(line)
+
+                    # we have replaced the line
+                    for line in maFile:
+                        newMaFile.write(line)
+
 
 
 def _parseArgs():
 
-    parser = argparse.ArgumentParser(description='MayaFileConverter - a shitty script to convert maya file version')
-    parser.add_argument('-v', help='target scene file version', nargs='?', required=False)
+    parser = argparse.ArgumentParser(
+        description='MayaFileConverter - a shitty script to convert maya file version')
+    parser.add_argument('-v', help='target scene file version',
+                        nargs='?', required=False)
     parser.add_argument('files', nargs='*')
     args = parser.parse_args()
     return args
