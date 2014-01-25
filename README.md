@@ -11,5 +11,7 @@ mayaFileConverter.py
 不过.ma的是可以的，因为我把2012不认识的那些flags可以删掉
 
 目前知道的不认识的有
+
 // Error: file: E:/shittyTools/2014_cube_2012.ma line 94: Invalid flag '-ch' // 
+
 // Error: line 213: Invalid flag '-objectFilterShowInHUD' // 
