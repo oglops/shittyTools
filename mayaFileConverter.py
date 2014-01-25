@@ -13,7 +13,7 @@ __license__ = "GPLv3"
 __version__ = "0.1"
 __maintainer__ = "oglop"
 __email__ = "oglops@gmail.com"
-__website__ = 'ilmvfx.wordpress.com'
+__website__ = 'https://ilmvfx.wordpress.com'
 __status__ = "Shitty"
 
 import os
@@ -35,19 +35,40 @@ def main(args=None):
         newFile = newName(f, args)
 
         if f.endswith('.mb'):
+
+            chunk = 1024
             with open(f, "rb") as mbFile:
-                m = mbFile.read()
-                verEndPos = m.find('UVER')
-                currentVer = m[0x20:verEndPos]
-                if currentVer != args.v:
+                with open(newFile, "wb") as newMbFile:
 
-                    print f, '-->', newFile
-                    m = m.replace(bytes(currentVer), bytes(args.v), 1)
+                    m = mbFile.read(chunk)
 
-                    with open(newFile, "wb") as newFile:
-                        newFile.write(m)
-                else:
-                    print f, '-->', 'skipped'
+                    verEndPos = m.find('UVER')
+
+                    currentVer = m[verEndPos-8:verEndPos]
+                    print 'currentVer [%s]' % currentVer
+                    if currentVer != args.v:
+
+                        print f, '-->', newFile
+
+                        newMbFile.write(m[:verEndPos-8])
+                        newMbFile.write(args.v)
+
+                        for i in range(8-len(args.v)):
+                            newMbFile.write(b'\x00')
+
+                        newMbFile.write(m[verEndPos:])
+
+                        chunk = 1024*1024
+                        while True:
+                            piece = mbFile.read(chunk)
+                            if not piece:
+                                print 'last run:' , piece 
+                                break
+                            newMbFile.write(piece)
+
+                    else:
+                        print f, '-->', 'skipped'
+
 
         elif f.endswith('.ma'):
 
@@ -70,6 +91,7 @@ def main(args=None):
                     # we have replaced the line
                     for line in maFile:
                         newMaFile.write(line)
+
 
 
 def _parseArgs():
