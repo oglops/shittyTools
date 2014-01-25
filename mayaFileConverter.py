@@ -49,7 +49,7 @@ def main(args=None):
                     if currentVer != args.v:
 
                         print f, '-->', newFile
-
+                        
                         newMbFile.write(m[:verEndPos-8])
                         newMbFile.write(args.v)
 
