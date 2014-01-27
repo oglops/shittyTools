@@ -125,7 +125,7 @@ def _parseArgs():
     parser = argparse.ArgumentParser(
         description='MayaFileConverter - a shitty script to convert maya file version')
     parser.add_argument('-v', help='target scene file version',
-                        nargs='?', required=False)
+                        nargs='?', required=True)
     parser.add_argument('files', nargs='*')
     args = parser.parse_args()
     return args
