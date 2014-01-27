@@ -21,6 +21,7 @@ mayaFileConverter.py
     // Error: file: E:/shittyTools/2014_cube_2012.ma line 94: Invalid flag '-ch' //
     
 下面这些是sceneConfiguration scriptNode里的, 虽然提示错误, 但是不影响打开文件.
+
     // Error: line 213: Invalid flag '-objectFilterShowInHUD' // 
     ...
-    还有好多
+    还有好多类似的
