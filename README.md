@@ -1,7 +1,7 @@
 shittyTools
 ===========
 
-shitty tools i wrote over the years
+shitty tools i wrote over the years / 脑残工具合集
 
 mayaFileConverter.py
 -----
